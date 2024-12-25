@@ -278,7 +278,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                       ),
                                     ),
                                   ),
-                                if (FFAppState().agent)
+                                if (!FFAppState().agent)
                                   Align(
                                     alignment: const AlignmentDirectional(0.0, -1.0),
                                     child: Container(
@@ -735,7 +735,7 @@ class _LogInWidgetState extends State<LogInWidget>
                           safeSetState(() {});
                           if (FFAppState().agent) {
                             context.goNamedAuth(
-                              'HomePage',
+                              'ExpertsFront',
                               context.mounted,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: const TransitionInfo(
@@ -748,7 +748,7 @@ class _LogInWidgetState extends State<LogInWidget>
                             );
                           } else {
                             context.goNamedAuth(
-                              'HomePage',
+                              'ExpertsFront',
                               context.mounted,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: const TransitionInfo(

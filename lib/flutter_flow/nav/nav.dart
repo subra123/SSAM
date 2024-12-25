@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -74,19 +75,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomePageWidget() : const FirstScreenWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const FirstScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? const HomePageWidget()
-              : const FirstScreenWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? const NavBarPage() : const FirstScreenWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          name: 'ExpertsFront',
+          path: '/expertsFront',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'ExpertsFront')
+              : const ExpertsFrontWidget(),
         ),
         FFRoute(
           name: 'Splash',
@@ -117,6 +119,49 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ForgePassword',
           path: '/forgePassword',
           builder: (context, params) => const ForgePasswordWidget(),
+        ),
+        FFRoute(
+          name: 'videopage',
+          path: '/videopage',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'videopage')
+              : const VideopageWidget(),
+        ),
+        FFRoute(
+          name: 'HomePage',
+          path: '/homePage',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'HomePage')
+              : const HomePageWidget(),
+        ),
+        FFRoute(
+          name: 'calender',
+          path: '/calender',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'calender')
+              : const CalenderWidget(),
+        ),
+        FFRoute(
+          name: 'EventAdd',
+          path: '/eventAdd',
+          builder: (context, params) => const EventAddWidget(),
+        ),
+        FFRoute(
+          name: 'ExpertsInfo',
+          path: '/expertsInfo',
+          builder: (context, params) => const ExpertsInfoWidget(),
+        ),
+        FFRoute(
+          name: 'Profile',
+          path: '/profile',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'Profile')
+              : const ProfileWidget(),
+        ),
+        FFRoute(
+          name: 'editprofile',
+          path: '/editprofile',
+          builder: (context, params) => const EditprofileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -266,7 +266,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                 ),
                               ),
                             ),
-                          if (FFAppState().agent)
+                          if (!FFAppState().agent)
                             Align(
                               alignment: const AlignmentDirectional(0.0, -1.0),
                               child: Container(
@@ -884,7 +884,7 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () async {
                                                 context.pushNamed(
-                                                  'HomePage',
+                                                  'ExpertsFront',
                                                   extra: <String, dynamic>{
                                                     kTransitionInfoKey:
                                                         const TransitionInfo(
@@ -919,6 +919,14 @@ class _SignUpWidgetState extends State<SignUpWidget>
                               onPressed: () async {
                                 FFAppState().agent = FFAppState().agent;
                                 safeSetState(() {});
+                                if (FFAppState().agent) {
+                                  context.pushNamedAuth(
+                                      'ExpertsFront', context.mounted);
+                                } else {
+                                  context.pushNamedAuth(
+                                      'ExpertsFront', context.mounted);
+                                }
+
                                 GoRouter.of(context).prepareAuthEvent();
 
                                 final user =
@@ -929,14 +937,6 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                 );
                                 if (user == null) {
                                   return;
-                                }
-
-                                if (FFAppState().agent) {
-                                  context.pushNamedAuth(
-                                      'HomePage', context.mounted);
-                                } else {
-                                  context.pushNamedAuth(
-                                      'HomePage', context.mounted);
                                 }
                               },
                               text: 'Sign up',
