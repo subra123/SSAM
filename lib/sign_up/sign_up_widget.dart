@@ -917,6 +917,8 @@ class _SignUpWidgetState extends State<SignUpWidget>
                             ),
                             FFButtonWidget(
                               onPressed: () async {
+                                FFAppState().agent = FFAppState().agent;
+                                safeSetState(() {});
                                 GoRouter.of(context).prepareAuthEvent();
 
                                 final user =
@@ -929,8 +931,6 @@ class _SignUpWidgetState extends State<SignUpWidget>
                                   return;
                                 }
 
-                                FFAppState().agent = FFAppState().agent;
-                                safeSetState(() {});
                                 if (FFAppState().agent) {
                                   context.pushNamedAuth(
                                       'HomePage', context.mounted);
